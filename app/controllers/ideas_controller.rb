@@ -14,6 +14,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     @idea = Idea.find(params[:id])
+    @comment = @idea.comments.build 
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +26,7 @@ class IdeasController < ApplicationController
   # GET /ideas/new.json
   def new
     @idea = Idea.new
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +43,7 @@ class IdeasController < ApplicationController
   # POST /ideas.json
   def create
     @idea = Idea.new(params[:idea])
+    @comment = @idea.comments.build 
 
     respond_to do |format|
       if @idea.save
