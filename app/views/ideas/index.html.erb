@@ -1,0 +1,33 @@
+<h1>Favourite Things</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Picture</th>
+    <th></th>
+  </tr>
+
+<% @ideas.each do |idea| %>
+  <tr>
+    <td><%= idea.name %></td>
+    <td><%= idea.description %></td>
+    <td><%= image_tag(idea.picture_url, :width => 100) if idea.picture.present? %></td>
+    <td>
+      <%= link_to idea_path(idea) do %>
+      <i class="index-icon icon-eye-open"></i>
+      <% end %>
+      <%= link_to edit_idea_path(idea) do %>
+      <i class="index-icon icon-pencil"></i>
+      <% end %>
+      <%= link_to idea_path(idea), method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="index-icon icon-trash"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= button_to 'New Idea', new_idea_path, :method => :get, :class => "btn btn-success" %>
